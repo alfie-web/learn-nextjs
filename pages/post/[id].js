@@ -9,8 +9,9 @@ const Post = ({ post }) => {
 
 	useEffect(async () => {
 		if (!post) {
-			const {data} = await axios.get(`https://jsonplaceholder.typicode.com/posts/${router.query.id}`)
-			setState(data)
+			// const {data} = await axios.get(`https://jsonplaceholder.typicode.com/posts/${router.query.id}`)
+			const { data } = await axios.get(`http://localhost:3002/posts/${router.query.id}`);
+			setState(data.data)
 		}
 	}, [post])
 	
@@ -23,7 +24,7 @@ const Post = ({ post }) => {
 				}
 			</div>
 
-			<Link href="/"><a>All posts</a></Link>
+			<Link href="/posts"><a>All posts</a></Link>
 		</div>
 	)
 }
@@ -35,10 +36,11 @@ Post.getInitialProps = async ({ req, query }) => {
 		}
 	}
 
-	const {data} = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}`)
+	// const {data} = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}`)
+	const { data } = await axios.get(`http://localhost:3002/posts/${query.id}`);
 
 	return {
-		post: data
+		post: data.data
 	}
 }
 

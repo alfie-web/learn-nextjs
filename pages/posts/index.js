@@ -3,9 +3,9 @@ import axios from 'axios';
 import Head from 'next/head'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
-import styles from '../styles/Home.module.css'
-import { postsActions } from '../store/actions';
-import Posts from '../components/Posts';
+import styles from '../../styles/Home.module.css'
+import { postsActions } from '../../store/actions';
+import Posts from '../../components/Posts';
 
 // Вот теперь всё работает правильно 
 // При первом рендере посты статичные (SSR), не из Redux
@@ -73,12 +73,12 @@ export default function Home({ posts }) {
 // Также здесь можно работать с БД напрямую
 export async function getServerSideProps(ctx) {
 	console.log('calls once on server?')
-	const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_page=7&_limit=10');
-	// const { data } = await axios.get('http://localhost:3002/posts');
+	// const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_page=7&_limit=10');
+	const { data } = await axios.get('http://localhost:3002/posts');
 	console.log('data', data)
 	return {
 		props: {
-			posts: data
+			posts: data.data
 		}
 	}
 }

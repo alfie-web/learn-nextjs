@@ -71,8 +71,8 @@ const Posts = ({ items }) => {
 			{ !posts.length && items.length ?
 				// Первый рендер для SEO
 				items.map(post => (
-					<div className="Post" key={post.id}>
-						<Link href="/post/[id]" as={`/post/${post.id}`}><a>{post.title}</a></Link>
+					<div className="Post" key={post._id}>
+						<Link href="/post/[id]" as={`/post/${post._id}`}><a>{post.title}</a></Link>
 					</div>
 				))
 				// <div>Loading</div>
@@ -80,8 +80,8 @@ const Posts = ({ items }) => {
 					<span>Redux</span>
 					{
 						posts.map(post => (
-							<div className="Post" key={post.id}>
-								<Link href="/post/[id]" as={`/post/${post.id}`}><a>{post.title}</a></Link>
+							<div className="Post" key={post._id}>
+								<Link href="/post/[id]" as={`/post/${post._id}`}><a>{post.title}</a></Link>
 							</div>
 						))
 					}
