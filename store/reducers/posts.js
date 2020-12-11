@@ -4,7 +4,11 @@ const initialState = {
 	posts: [],
 	currentPost: null,
 	isFetching: false,
-	error: null
+	error: null,
+	hasNextPage: false,
+	totalDocs: 0,
+	currentPage: 1,
+	totalPages: 0
 }
 
 const postsReducer = (state = initialState, { type, payload }) => {
@@ -12,7 +16,11 @@ const postsReducer = (state = initialState, { type, payload }) => {
 		case types.GET_POSTS:
 			return {
 				...state,
-				posts: payload,
+				posts: payload.posts,
+				hasNextPage: payload.hasNextPage,
+				totalDocs: payload.totalDocs,
+				currentPage: payload.currentPage,
+				totalPages: payload.totalPages,
 				isFetching: false,
 				error: null
 			}

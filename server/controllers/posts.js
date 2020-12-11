@@ -1,17 +1,37 @@
 const { PostModel } = require('../models');
 
 class PostsController {
-	getAll = (req, res) => {
-		PostModel.find()
-			.then(posts => {
-				res.json({
-					status: 'success',
-					data: posts
-				})
+	getAll = async (req, res) => {
+		console.log('query', req.query)
+		const { page } = req.query;
+
+		try {
+			const findedPosts = await PostModel.paginate({}, {
+				page,
+				limit: 3,
 			})
-			.catch(e => res.status(400).json({
+
+			res.json({
+				status: 'success',
+				data: findedPosts
+			})
+
+		} catch(e) {
+			res.status(400).json({
 				status: 'error'
-			}))
+			})
+		}
+
+		// PostModel.find()
+		// 	.then(posts => {
+		// 		res.json({
+		// 			status: 'success',
+		// 			data: posts
+		// 		})
+		// 	})
+		// 	.catch(e => res.status(400).json({
+		// 		status: 'error'
+		// 	}))
 	}
 
 	getById = async (req, res) => {

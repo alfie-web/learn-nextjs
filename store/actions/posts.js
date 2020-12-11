@@ -2,9 +2,15 @@ import axios from 'axios';
 import * as types from '../types';
 
 const postsActions = {
-	setPosts: (posts) => ({
+	setPosts: ({ docs, page, hasNextPage, totalDocs, totalPages }) => ({
 		type: types.GET_POSTS,
-		payload: posts
+		payload: {
+			posts: docs,
+			currentPage: page,
+			totalPages,
+			hasNextPage,
+			totalDocs
+		}
 	}),
 
 	fetchPosts: () => async dispatch => {

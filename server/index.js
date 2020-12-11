@@ -1,5 +1,4 @@
 const express = require('express')
-const next = require('next')
 const connectDB = require('./db');
 const createRoutes = require('./routes');
 
